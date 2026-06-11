@@ -1,0 +1,29 @@
+{
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "metrics": {
+    "STN": {
+      "healthy_beta_power_mean": 13.816138355367062,
+      "healthy_beta_power_std": 1.0725857645295442,
+      "parkinsonian_beta_power_mean": 53.28431526776419,
+      "parkinsonian_beta_power_std": 6.473453927514693,
+      "beta_power_ratio_pd_over_healthy": 3.856672095865716,
+      "healthy_peak_frequency_mean_hz": 16.015625,
+      "parkinsonian_peak_frequency_mean_hz": 14.21875
+    },
+    "GPe": {
+      "healthy_beta_power_mean": 29.229295664784832,
+      "healthy_beta_power_std": 2.7288772200669564,
+      "parkinsonian_beta_power_mean": 43.18740740013749,
+      "parkinsonian_beta_power_std": 15.143063028347072,
+      "beta_power_ratio_pd_over_healthy": 1.4775384222538503,
+      "healthy_peak_frequency_mean_hz": 32.5,
+      "parkinsonian_peak_frequency_mean_hz": 15.0
+    }
+  }
+}
