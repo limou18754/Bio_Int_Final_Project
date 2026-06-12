@@ -1,7 +1,6 @@
 __pycache__/
 *.pyc
-outputs/*
-!outputs/.gitkeep
+src/outputs/
 
 # LaTeX build artifacts
 *.aux

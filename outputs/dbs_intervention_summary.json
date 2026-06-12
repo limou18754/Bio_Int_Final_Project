@@ -1,0 +1,332 @@
+{
+  "experiment": {
+    "type": "dbs_intervention",
+    "trials_per_condition": 10,
+    "seed_start": 1,
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "duration_ms": 8000.0,
+    "analysis_start_ms": 1000.0,
+    "analysis_stop_ms": 8000.0,
+    "bin_ms": 2.0,
+    "focus_band_low_hz": 10.0,
+    "focus_band_high_hz": 25.0,
+    "dbs_frequency_hz": 130.0,
+    "dbs_weight": -0.25,
+    "dbs_start_ms": 1000.0
+  },
+  "interventions": {
+    "stn_dbs": {
+      "target": "STN",
+      "interval_ms": 7.6923076923076925,
+      "weight": -0.25,
+      "start_ms": 1000.0,
+      "stop_ms": 8000.0,
+      "delay_ms": 0.1
+    },
+    "gpi_dbs": {
+      "target": "GPi",
+      "interval_ms": 7.6923076923076925,
+      "weight": -0.25,
+      "start_ms": 1000.0,
+      "stop_ms": 8000.0,
+      "delay_ms": 0.1
+    }
+  },
+  "conditions": [
+    {
+      "condition": "healthy",
+      "populations": {
+        "STN": {
+          "beta_power_mean": 13.964276173072061,
+          "beta_power_std": 1.2397845393107807,
+          "beta_peak_frequency_mean_hz": 16.11328125,
+          "beta_peak_frequency_std_hz": 3.6146006881487787,
+          "global_peak_frequency_mean_hz": 90.087890625,
+          "global_peak_frequency_std_hz": 79.9369497988618,
+          "mean_rate_hz_mean": 7.3950000000000005,
+          "mean_rate_hz_std": 0.4973711503741344,
+          "trial_beta_power": [
+            14.656318616717556,
+            16.11895918531869,
+            13.903315123239516,
+            13.35971829948896,
+            14.800129564106957,
+            13.194690262120368,
+            14.789348485936408,
+            14.71964834013637,
+            11.975670595626504,
+            12.124963258029275
+          ]
+        },
+        "GPe": {
+          "beta_power_mean": 27.275090656771976,
+          "beta_power_std": 3.070014451309444,
+          "beta_peak_frequency_mean_hz": 18.75,
+          "beta_peak_frequency_std_hz": 3.2477127242804475,
+          "global_peak_frequency_mean_hz": 85.791015625,
+          "global_peak_frequency_std_hz": 70.01757333058437,
+          "mean_rate_hz_mean": 12.370714285714284,
+          "mean_rate_hz_std": 0.7862559820998217,
+          "trial_beta_power": [
+            32.195510421064135,
+            25.086140377587256,
+            29.79465912444011,
+            24.367995059206127,
+            25.540615476335404,
+            23.02695581911012,
+            26.459593820831543,
+            32.413912614312515,
+            27.9541495583217,
+            25.911374296510836
+          ]
+        },
+        "GPi": {
+          "beta_power_mean": 6.832472515548288,
+          "beta_power_std": 1.999685459124451,
+          "beta_peak_frequency_mean_hz": 18.212890625,
+          "beta_peak_frequency_std_hz": 4.8976824359494975,
+          "global_peak_frequency_mean_hz": 10.986328125,
+          "global_peak_frequency_std_hz": 8.56443085444653,
+          "mean_rate_hz_mean": 3.057142857142857,
+          "mean_rate_hz_std": 0.5938373995824591,
+          "trial_beta_power": [
+            6.695034547203038,
+            8.309573517266797,
+            7.427571488036186,
+            5.490232958747692,
+            8.805571342549687,
+            3.6684006800515747,
+            6.270491780235161,
+            10.355718174980591,
+            3.8895382642724834,
+            7.412592402139667
+          ]
+        }
+      }
+    },
+    {
+      "condition": "parkinsonian",
+      "populations": {
+        "STN": {
+          "beta_power_mean": 70.20889323264122,
+          "beta_power_std": 9.163159171269415,
+          "beta_peak_frequency_mean_hz": 14.84375,
+          "beta_peak_frequency_std_hz": 1.8682740693075186,
+          "global_peak_frequency_mean_hz": 14.84375,
+          "global_peak_frequency_std_hz": 1.8682740693075186,
+          "mean_rate_hz_mean": 19.115714285714287,
+          "mean_rate_hz_std": 1.8517581276358168,
+          "trial_beta_power": [
+            70.94733000565196,
+            74.33121281078186,
+            72.11817818237893,
+            83.80284766935212,
+            63.170447333864324,
+            63.11342883101589,
+            87.61182565442583,
+            61.729456158262515,
+            67.33270573483175,
+            57.93149994584708
+          ]
+        },
+        "GPe": {
+          "beta_power_mean": 60.48054919205875,
+          "beta_power_std": 17.580285330793522,
+          "beta_peak_frequency_mean_hz": 15.72265625,
+          "beta_peak_frequency_std_hz": 1.9384212149686726,
+          "global_peak_frequency_mean_hz": 15.087890625,
+          "global_peak_frequency_std_hz": 2.740036688788711,
+          "mean_rate_hz_mean": 9.212857142857143,
+          "mean_rate_hz_std": 1.382849763852804,
+          "trial_beta_power": [
+            97.2642645939587,
+            49.26831834540361,
+            52.507603440339594,
+            72.63036480845341,
+            35.80775591659486,
+            43.142388739004,
+            78.63544561920118,
+            67.6284676349001,
+            57.54146438833161,
+            50.37941843440048
+          ]
+        },
+        "GPi": {
+          "beta_power_mean": 179.86984536130217,
+          "beta_power_std": 33.16776000542818,
+          "beta_peak_frequency_mean_hz": 14.94140625,
+          "beta_peak_frequency_std_hz": 1.9061739546819467,
+          "global_peak_frequency_mean_hz": 14.94140625,
+          "global_peak_frequency_std_hz": 1.9061739546819467,
+          "mean_rate_hz_mean": 30.342857142857145,
+          "mean_rate_hz_std": 3.6950518485219264,
+          "trial_beta_power": [
+            212.10172918849025,
+            216.88559569857435,
+            201.4896819535001,
+            202.01634570710473,
+            180.49809295596359,
+            110.18150759368855,
+            207.60616089624372,
+            157.60984179995117,
+            167.21120068419705,
+            143.09829713530792
+          ]
+        }
+      }
+    },
+    {
+      "condition": "parkinsonian_stn_dbs",
+      "populations": {
+        "STN": {
+          "beta_power_mean": 24.357245540496667,
+          "beta_power_std": 3.510128433681508,
+          "beta_peak_frequency_mean_hz": 13.0859375,
+          "beta_peak_frequency_std_hz": 1.7026948998205755,
+          "global_peak_frequency_mean_hz": 84.27734375,
+          "global_peak_frequency_std_hz": 76.31609444115935,
+          "mean_rate_hz_mean": 10.839285714285714,
+          "mean_rate_hz_std": 0.6779941153197152,
+          "trial_beta_power": [
+            23.322793042073418,
+            24.95540576913957,
+            21.459702008087213,
+            34.31216632322023,
+            21.866802870448925,
+            23.552616168219974,
+            24.958092894323226,
+            24.064327862727534,
+            22.100614492032946,
+            22.97993397469361
+          ]
+        },
+        "GPe": {
+          "beta_power_mean": 12.777659362353502,
+          "beta_power_std": 4.107608586787806,
+          "beta_peak_frequency_mean_hz": 14.55078125,
+          "beta_peak_frequency_std_hz": 1.9989735830526094,
+          "global_peak_frequency_mean_hz": 13.4765625,
+          "global_peak_frequency_std_hz": 3.4746966552064835,
+          "mean_rate_hz_mean": 3.4714285714285715,
+          "mean_rate_hz_std": 0.897462408967754,
+          "trial_beta_power": [
+            20.376336644829717,
+            10.649719809662262,
+            10.221141060169044,
+            14.35093241984435,
+            5.5564437926201125,
+            8.392480132261515,
+            15.382613788104628,
+            16.94220207868297,
+            13.921766180223681,
+            11.982957717136744
+          ]
+        },
+        "GPi": {
+          "beta_power_mean": 76.51105592466325,
+          "beta_power_std": 13.33148638699798,
+          "beta_peak_frequency_mean_hz": 14.404296875,
+          "beta_peak_frequency_std_hz": 3.5897805226001567,
+          "global_peak_frequency_mean_hz": 35.44921875,
+          "global_peak_frequency_std_hz": 47.4031323971272,
+          "mean_rate_hz_mean": 19.555714285714284,
+          "mean_rate_hz_std": 1.7100089509253742,
+          "trial_beta_power": [
+            78.72635433339249,
+            88.95229034137509,
+            78.1307450074171,
+            99.83667943912877,
+            78.4681415736555,
+            48.05833463847148,
+            74.71250258813373,
+            84.60797023340044,
+            66.34277936930623,
+            67.27476172235177
+          ]
+        }
+      }
+    },
+    {
+      "condition": "parkinsonian_gpi_dbs",
+      "populations": {
+        "STN": {
+          "beta_power_mean": 70.20889323264122,
+          "beta_power_std": 9.163159171269415,
+          "beta_peak_frequency_mean_hz": 14.84375,
+          "beta_peak_frequency_std_hz": 1.8682740693075186,
+          "global_peak_frequency_mean_hz": 14.84375,
+          "global_peak_frequency_std_hz": 1.8682740693075186,
+          "mean_rate_hz_mean": 19.115714285714287,
+          "mean_rate_hz_std": 1.8517581276358168,
+          "trial_beta_power": [
+            70.94733000565196,
+            74.33121281078186,
+            72.11817818237893,
+            83.80284766935212,
+            63.170447333864324,
+            63.11342883101589,
+            87.61182565442583,
+            61.729456158262515,
+            67.33270573483175,
+            57.93149994584708
+          ]
+        },
+        "GPe": {
+          "beta_power_mean": 60.48054919205875,
+          "beta_power_std": 17.580285330793522,
+          "beta_peak_frequency_mean_hz": 15.72265625,
+          "beta_peak_frequency_std_hz": 1.9384212149686726,
+          "global_peak_frequency_mean_hz": 15.087890625,
+          "global_peak_frequency_std_hz": 2.740036688788711,
+          "mean_rate_hz_mean": 9.212857142857143,
+          "mean_rate_hz_std": 1.382849763852804,
+          "trial_beta_power": [
+            97.2642645939587,
+            49.26831834540361,
+            52.507603440339594,
+            72.63036480845341,
+            35.80775591659486,
+            43.142388739004,
+            78.63544561920118,
+            67.6284676349001,
+            57.54146438833161,
+            50.37941843440048
+          ]
+        },
+        "GPi": {
+          "beta_power_mean": 144.29605841614412,
+          "beta_power_std": 31.21425431115336,
+          "beta_peak_frequency_mean_hz": 14.501953125,
+          "beta_peak_frequency_std_hz": 2.0721772630784128,
+          "global_peak_frequency_mean_hz": 14.35546875,
+          "global_peak_frequency_std_hz": 2.333555301825883,
+          "mean_rate_hz_mean": 22.829285714285717,
+          "mean_rate_hz_std": 3.4447541454288113,
+          "trial_beta_power": [
+            159.26056397051173,
+            184.9557493685964,
+            168.67080951670295,
+            162.8692464676377,
+            165.0696465245062,
+            82.8765134796894,
+            163.60890693828443,
+            115.45864634770392,
+            133.27126922700654,
+            106.91923232080197
+          ]
+        }
+      }
+    }
+  ]
+}
