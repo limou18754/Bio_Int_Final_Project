@@ -97,6 +97,40 @@ class BasalGangliaNetwork:
         for connection_spec in self.config["connections"]:
             self._connect_populations(connection_spec)
 
+        intervention = self.config.get("intervention")
+        if intervention is not None:
+            self._add_intervention(intervention)
+
+    def _add_intervention(self, intervention_spec: dict) -> None:
+        """Attach a deterministic pulse train intervention to one population."""
+
+        target_name = intervention_spec["target"]
+        if target_name not in self.populations:
+            raise ValueError(f"Unknown intervention target population: {target_name}")
+
+        start_ms = intervention_spec.get("start_ms", 0.0)
+        stop_ms = intervention_spec.get("stop_ms", self.config["duration_ms"])
+        interval_ms = intervention_spec["interval_ms"]
+        if stop_ms <= start_ms:
+            raise ValueError("Intervention stop_ms must be greater than start_ms.")
+        if interval_ms <= 0.0:
+            raise ValueError("Intervention interval_ms must be positive.")
+
+        number = int(np.floor((stop_ms - start_ms) / interval_ms)) + 1
+        for cell in self.populations[target_name].cells:
+            stim = h.NetStim()
+            stim.interval = interval_ms
+            stim.number = max(number, 1)
+            stim.start = start_ms
+            stim.noise = 0.0
+
+            netcon = h.NetCon(stim, cell)
+            netcon.delay = intervention_spec.get("delay_ms", 0.1)
+            netcon.weight[0] = intervention_spec["weight"]
+
+            self.external_stims.append(stim)
+            self.connections.append(netcon)
+
     @staticmethod
     def _vector_to_numpy(vector) -> np.ndarray:
         """Convert a NEURON Vector into a 1D numpy array reliably."""

@@ -33,6 +33,7 @@ def save_rate_plot(healthy_summary: dict, pd_summary: dict, output_path: Path) -
     """Save representative rate traces for STN and GPe."""
 
     fig, axes = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
+    analysis_start_ms = max(healthy_summary.get("analysis_start_ms", 0.0), pd_summary.get("analysis_start_ms", 0.0))
 
     for axis, population_name in zip(axes, ("STN", "GPe")):
         axis.plot(
@@ -49,6 +50,8 @@ def save_rate_plot(healthy_summary: dict, pd_summary: dict, output_path: Path) -
             color="tab:red",
             alpha=0.8,
         )
+        if analysis_start_ms > 0.0:
+            axis.axvline(analysis_start_ms, color="0.35", linestyle="--", linewidth=1.0, label="Analysis start")
         axis.set_ylabel("Rate (Hz)")
         axis.set_title(f"{population_name} Population Rate")
         axis.legend(loc="upper right")
@@ -98,4 +101,3 @@ def save_power_spectrum_plot(healthy_trials: list[dict], pd_trials: list[dict], 
     fig.tight_layout()
     fig.savefig(output_path, dpi=200)
     plt.close(fig)
-

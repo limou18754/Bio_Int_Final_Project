@@ -1,0 +1,172 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+\usepackage{subcaption}
+\graphicspath{{../figures/}{../outputs/}}
+
+\title{Dopamine Depletion and the Emergence of Pathological Beta Oscillations in a Simplified Basal Ganglia Network}
+\author{Li Yian}
+\date{\today}
+
+\newcommand{\maybeincludegraphics}[2]{%
+  \includegraphics[width=#2\linewidth]{#1}%
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Abnormal beta synchronization is a common feature of parkinsonian basal ganglia activity, but the circuit mechanism behind it is still debated. In this project, I used a simplified five-population spiking network in NEURON (D1, D2, STN, GPe, and GPi) to test whether dopamine depletion shifts the STN-GPe loop toward a low-beta oscillatory state. Under the parkinsonian parameter set, 10--25 Hz power increased in both STN and GPe, with the larger increase appearing in STN. A D2-to-GPe weight sweep further showed that stronger indirect-pathway inhibition was associated with higher STN low-beta power. A simplified DBS-like input aimed at STN reduced beta activity substantially, whereas the same type of input aimed at GPi produced little change in this reduced network. These results suggest that dopamine depletion can strengthen pathological beta activity by changing pathway balance and increasing feedback gain in the STN-GPe loop.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Parkinson's disease, basal ganglia, beta oscillations, subthalamic nucleus, globus pallidus, computational modeling
+
+\section{Introduction}
+Parkinson's disease is associated with abnormal rhythmic activity across the basal ganglia, especially in the beta range, and this excessive synchronization has been linked to impaired movement \citep{Brown2007,Hammond2007}. A common circuit-level view is that dopamine loss changes the balance between the direct and indirect pathways, which then alters how striatal activity shapes downstream basal ganglia nuclei \citep{Albin1989,DeLong1990}. Many mechanistic models also emphasize the interaction between the subthalamic nucleus (STN) and external globus pallidus (GPe), because this delayed excitatory-inhibitory loop can support beta-range oscillations, and similar activity has been reported experimentally in the subthalamo-pallidal system \citep{Mallet2008,Holgado2010}.
+
+The full biological system is much more complicated than any reduced model. It includes heterogeneous cell types, structured cortical input, and detailed intrinsic membrane properties. Even so, a simplified network can still be useful if the goal is to test a specific circuit idea. For that reason, this project uses built-in \texttt{IntFire1} cells in NEURON rather than a large conductance-based model \citep{HinesCarnevale1997}. The aim is not to reproduce every physiological detail, but to check whether a small and interpretable basal ganglia network can show the expected shift from a healthy state to a parkinsonian one.
+
+The main question is whether dopamine depletion, represented here as a change in pathway balance and loop gain, is enough to promote pathological beta oscillations in a simplified basal ganglia circuit. I expected that weaker direct-pathway influence, stronger indirect-pathway inhibition, and stronger effective STN-GPe coupling would together increase beta-band power in STN and GPe population activity.
+
+\begin{figure}[htbp]
+  \centering
+  \maybeincludegraphics{basal_ganglia_schematic.png}{0.92}
+  \caption{Simplified basal ganglia network used in the project. Excitatory and inhibitory projections define the direct pathway, indirect pathway, and reciprocal STN-GPe loop. The parkinsonian condition changes external drive and selectively strengthens several indirect-pathway and loop-related interactions while keeping the same overall circuit structure.}
+  \label{fig:schematic}
+\end{figure}
+
+\section{Results}
+
+\subsection{Dopamine depletion amplifies low-beta oscillations in the STN-GPe circuit}
+
+I first compared representative spiking activity between healthy and parkinsonian states. Figure~\ref{fig:combined_dynamics}a and Figure~\ref{fig:combined_dynamics}b show raster plots for the STN and GPe populations under both conditions. In the healthy state, spiking remains irregular and largely reflects noisy drive plus sparse recurrent input. In the parkinsonian state, activity becomes more structured, suggesting stronger network coordination.
+
+At the population level, spike times were converted into firing-rate traces. Figure~\ref{fig:combined_dynamics}c shows that the healthy state remains variable but only weakly rhythmic, whereas the parkinsonian state develops clearer temporal fluctuations. That pattern matches the idea that dopamine depletion increases the effective gain of the delayed STN-GPe feedback loop.
+
+I then quantified the shift with power spectral analysis (Figure~\ref{fig:combined_dynamics}d). Power spectra were computed from steady-state population-rate traces using Welch's method, and focus-band power was defined by integrating spectral power from 10 to 25 Hz. As summarized in Table~\ref{tab:metrics}, the parkinsonian parameter set produced a strong increase in low-beta power. In STN, mean 10--25 Hz power increased from 14.70 in the healthy condition to 74.77 in the parkinsonian condition, a 5.08-fold increase. In GPe, it increased from 28.17 to 63.64, a 2.26-fold increase.
+
+To avoid relying only on a single dominant peak, I examined both the global spectral peak and the strongest local peak inside the 10--25 Hz band. In this parameter set, those values were the same: for STN, both parkinsonian averages were 15.45 Hz, and for GPe they were 14.32 Hz (Table~\ref{tab:metrics}). I initially evaluated the spectra with a more conventional 15--30 Hz beta window, but the dominant parkinsonian peaks repeatedly fell below 20 Hz. For that reason, I shifted the main analysis band to 10--25 Hz so that the summary metric would better match where the model's oscillatory activity was actually concentrated. This places the strongest effect in the low-beta range, which is consistent with studies that separate low-beta activity around 13--20 Hz from higher beta activity in Parkinson's disease \citep{JenkinsonBrown2011,Levy2002,Mathiopoulou2024}.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \maybeincludegraphics{healthy_raster.png}{1.0}
+    \caption{Healthy Raster}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \maybeincludegraphics{parkinsonian_raster.png}{1.0}
+    \caption{Parkinsonian Raster}
+  \end{subfigure}
+
+  \vspace{0.2cm}
+
+  \begin{subfigure}[b]{0.84\textwidth}
+    \centering
+    \maybeincludegraphics{population_rates.png}{1.0}
+    \caption{Population Firing Rates}
+  \end{subfigure}
+
+  \vspace{0.2cm}
+
+  \begin{subfigure}[b]{0.84\textwidth}
+    \centering
+    \maybeincludegraphics{power_spectra.png}{1.0}
+    \caption{Power Spectra}
+  \end{subfigure}
+
+  \caption{Dopamine depletion promotes low-beta synchronization in the STN-GPe circuit. (a, b) Representative raster plots for STN and GPe populations show a shift from irregular spiking in the healthy state to more structured activity in the parkinsonian state. (c) Population firing-rate traces show stronger rhythmic fluctuations under parkinsonian conditions. (d) Mean power spectra across trials show a marked increase in oscillatory power within the 10--25 Hz low-beta analysis range (shaded area).}
+  \label{fig:combined_dynamics}
+\end{figure}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccc}
+    \hline
+    Population & Healthy 10--25 & Parkinsonian 10--25 & Ratio (PD/Healthy) & PD global peak (Hz) & PD 10--25 peak (Hz) \\
+    \hline
+    STN & 14.70 $\pm$ 2.08 & 74.77 $\pm$ 16.47 & 5.08 & 15.45 & 15.45 \\
+    GPe & 28.17 $\pm$ 6.03 & 63.64 $\pm$ 21.50 & 2.26 & 14.32 & 14.32 \\
+    \hline
+  \end{tabular}%
+  }
+  \caption{Summary metrics from \texttt{summary.json}, averaged across 10 trials per condition. Each simulation lasted 8000 ms, and the first 1000 ms was discarded before spectral analysis.}
+  \label{tab:metrics}
+\end{table}
+
+\subsection{A targeted D2-to-GPe sweep reveals population-specific sensitivity}
+I then ran an additional experiment that kept the rest of the parkinsonian parameter set fixed while varying only the D2-to-GPe inhibitory weight scale from 1.0 to 2.0 across the same 10 seeds. Figure~\ref{fig:d2sweep} shows that this manipulation affected STN and GPe differently. In STN, mean 10--25 Hz power increased from 64.20 at scale 1.0 to 74.77 at the parkinsonian reference scale of 1.62, and then stayed near that level for stronger values. In GPe, the same sweep showed the opposite trend: mean 10--25 Hz power decreased from 107.09 at scale 1.0 to 63.64 at scale 1.62, and then fell further to 44.37 at scale 2.0.
+
+This sweep helps clarify the main comparison between healthy and parkinsonian states. Stronger D2-mediated inhibition onto GPe was enough, by itself, to push STN toward a stronger low-beta state within the parkinsonian background. At the same time, the effect was not a uniform increase across the whole circuit. Instead, increasing D2-to-GPe inhibition seemed to redistribute rhythmic expression across the loop: STN beta power rose modestly, while GPe beta power dropped as inhibition became stronger. The fact that the scale 1.62 point reproduces the same STN and GPe values listed in Table~\ref{tab:metrics} also confirms that this sweep is directly tied to the main parkinsonian parameter set.
+
+\begin{figure}[htbp]
+  \centering
+  \maybeincludegraphics{d2_gpe_beta_power_sweep.png}{0.92}
+  \caption{Targeted D2-to-GPe weight sweep on the parkinsonian background. The dashed blue line marks the healthy reference scale, and the dotted red line marks the parkinsonian reference scale used in the main comparison. Shaded regions show one standard deviation across 10 seeds.}
+  \label{fig:d2sweep}
+\end{figure}
+
+\subsection{A simplified DBS-like intervention suppresses low-beta activity when it targets the STN}
+I also ran an intervention experiment on the parkinsonian background in which a high-frequency 130 Hz pulse train was delivered either to STN or to GPi from 1000 ms onward. In this reduced model, the pulse train was implemented phenomenologically as a strong disruptive or suppressive input rather than as a detailed extracellular stimulation model. The goal was not to reproduce the full cellular action of DBS, but to test whether directly perturbing a key part of the oscillatory loop can reduce pathological low-beta activity.
+
+Figure~\ref{fig:dbs} shows that the result depended strongly on the stimulation target. STN-directed stimulation substantially reduced low-beta power in both populations that define the core oscillatory loop. Using the finer 2 ms binning chosen for the intervention analysis, mean STN 10--25 Hz power fell from 70.21 in the untreated parkinsonian condition to 24.36 with STN DBS, while GPe power fell from 60.48 to 12.78. These correspond to reductions of about 65\% in STN and 79\% in GPe relative to the untreated parkinsonian baseline. By contrast, GPi-directed stimulation left STN and GPe low-beta power largely unchanged in this reduced architecture.
+
+This target difference follows from the structure of the model. Pathological beta is generated mainly by the reciprocal STN-GPe loop, so disrupting STN has a direct effect on the oscillatory core. GPi, in contrast, acts mostly as a downstream readout here, because the reduced circuit does not include thalamic or cortical feedback pathways through which GPi stimulation could reshape the upstream loop.
+
+\begin{figure}[htbp]
+  \centering
+  \maybeincludegraphics{dbs_intervention_spectra.png}{0.92}
+  \caption{Power spectra for healthy, parkinsonian, and DBS intervention conditions. A 130 Hz DBS-like pulse train delivered to STN reduced 10--25 Hz power in both STN and GPe, whereas the same phenomenological intervention delivered to GPi did not alter the upstream STN-GPe loop in the reduced architecture.}
+  \label{fig:dbs}
+\end{figure}
+
+\section{Discussion}
+This simplified model supports the idea that dopamine depletion can promote pathological low-beta oscillations by shifting basal ganglia pathway balance and increasing effective loop gain in the STN-GPe circuit. In the parkinsonian parameter set, D1-related direct-pathway influence was reduced, D2-mediated inhibition onto GPe was strengthened, and the reciprocal STN-GPe interaction was enhanced. Together with connection delays and noisy drive, these changes were enough to produce stronger low-beta structure in the simulated population activity.
+
+The effect was especially clear in STN, where 10--25 Hz power increased by more than a factor of five and the dominant parkinsonian peak remained inside the low-beta analysis band. One reasonable interpretation is that stronger indirect-pathway inhibition changes the operating point of GPe, which then changes the feedback received by STN. Because STN excites GPe and GPe inhibits STN, the reciprocal loop can behave like a delayed excitatory-inhibitory oscillator. Once the coupling becomes strong enough, oscillatory activity in the lower beta range becomes more prominent. This is broadly consistent with earlier computational and experimental work on beta-generating STN-GPe regimes \citep{Kumar2011,Mallet2008,Holgado2010}.
+
+The D2-to-GPe sweep adds a useful detail to that interpretation. When only this weight was varied on top of the parkinsonian background, STN beta power rose toward the parkinsonian reference level and then plateaued, while GPe beta power declined across the same sweep. Rather than amplifying rhythmic power everywhere, stronger indirect-pathway inhibition seems to shift the operating point of the loop in a population-specific way, favoring stronger low-beta expression in STN while reducing GPe output when inhibition becomes too strong.
+
+The DBS-like intervention points in the same general direction. When the parkinsonian network received a high-frequency suppressive pulse train at STN, low-beta power in both STN and GPe dropped markedly. In this model, that makes sense: if pathological beta depends on recurrent STN-GPe feedback, then directly perturbing STN should weaken the rhythm. The lack of an upstream effect from GPi stimulation is also understandable, because the reduced circuit does not include thalamocortical pathways that might carry those effects back into the loop.
+
+The strongest pathological structure in this model falls in the lower part of the broader beta regime rather than near 20--30 Hz. For that reason, the 10--25 Hz analysis band gives a more faithful summary of the present simulations. That choice is also compatible with experimental studies that treat low-beta activity around 13--20 Hz as distinct from higher beta activity in Parkinson's disease \citep{JenkinsonBrown2011,Levy2002,Mathiopoulou2024}.
+
+At the same time, the model is intentionally minimal and has several limitations. First, the neurons are represented by \texttt{IntFire1} artificial cells, so realistic membrane conductances and detailed spike-generation dynamics are not included. The model therefore does not address the microscopic question of how dopamine loss alters specific ion channels or cellular electrophysiology. Instead, those effects are folded into direct changes in network parameters, which pushes the abstraction one level higher. That choice helps isolate circuit-level mechanisms by setting aside disease phenomena that would arise primarily from cell-intrinsic changes and keeping the focus on how altered pathway balance and coupling reshape network dynamics. Second, the network leaves out several structures that matter in vivo, including cortex, thalamus, and striatal microcircuit heterogeneity. Third, the DBS-like intervention is a phenomenological pulse train rather than a biophysical model of extracellular stimulation, axonal recruitment, or antidromic effects. Fourth, the parameter values were chosen to test a qualitative mechanism rather than to fit a specific experimental dataset. For these reasons, the present results should be read as a proof-of-principle circuit study rather than a quantitatively validated disease model.
+
+This project shows that a lightweight and interpretable basal ganglia model can reproduce one central qualitative feature of parkinsonian dynamics: stronger low-beta oscillatory structure under dopamine-depleted conditions. It also indicates that interventions work best when they directly affect the loop that is generating the rhythm. Even in a reduced setting, the model offers a clear mechanism linking altered pathway balance and stronger STN-GPe feedback to pathological beta activity.
+
+\section{Methods}
+
+\subsection{Model architecture}
+The model was implemented in NEURON as a simplified spiking network composed of five populations: D1, D2, STN, GPe, and GPi \citep{HinesCarnevale1997}. Each population used built-in \texttt{IntFire1} cells with population-specific membrane time constants, refractory periods, and stochastic external drive. Connectivity was sparse and random, with fixed synaptic signs and delays chosen to reflect the intended roles of the direct pathway, indirect pathway, and STN-GPe feedback loop.
+
+\subsection{Healthy and parkinsonian conditions}
+Two parameter sets were compared. In the healthy condition, all population drives and connection weights used baseline values. In the parkinsonian condition, D1 drive was reduced, D2 drive was increased, and several key weights were scaled to strengthen indirect-pathway and STN-GPe interactions. In the reported configuration, the D2-to-GPe inhibitory projection was strengthened, the STN-to-GPe excitatory projection was increased, and the GPe-to-STN inhibitory projection was also enhanced to produce a pronounced low-beta-dominant oscillatory regime.
+
+\subsection{Simulation protocol}
+Each simulation ran for 8000 ms with a time step of 0.1 ms. Spike times were recorded from each cell, and 10 trials were run for each condition using seeds 1 through 10. The main experiment compared healthy and parkinsonian states with identical seed sets so that the summary statistics reflected condition-dependent changes rather than differences in trial count.
+
+For the extension experiment, I repeated the same 10 seeds while keeping the full parkinsonian parameter set fixed except for the D2-to-GPe projection. The corresponding connection-weight scale was swept across 1.0, 1.2, 1.4, 1.62, 1.8, and 2.0. This design isolates one hypothesized control parameter while preserving the rest of the parkinsonian loop configuration.
+
+For the intervention experiment, I again used the same 10 seeds and compared four conditions: healthy, untreated parkinsonian, parkinsonian with STN-directed DBS-like input, and parkinsonian with GPi-directed DBS-like input. The intervention was modeled as a deterministic 130 Hz pulse train beginning at 1000 ms and continuing through the end of the simulation. In the present reduced model, each pulse contributed a negative synaptic event to the targeted population, which should be understood as a phenomenological suppressive or disruptive effect rather than a literal model of extracellular stimulation.
+
+\subsection{Data analysis}
+For each trial, merged spike times from STN and GPe were converted into population-rate traces using 5 ms bins for the main comparison and the D2-to-GPe sweep. To reduce contamination from transient initialization effects, the first 1000 ms of each simulation was excluded from the rate and spectral analysis. Power spectra were then computed from the remaining steady-state window using Welch's method \citep{Welch1967}. Focus-band power was defined as the integrated spectral power between 10 and 25 Hz. I initially tested a 15--30 Hz beta window, but in the simulated parkinsonian spectra the dominant peaks consistently appeared below 20 Hz, so I expanded the lower edge of the analysis band to better capture the oscillatory regime actually expressed by the model. This project-defined interval therefore emphasizes the lower-beta regime while remaining motivated by experimental studies that analyze low-beta activity around 13--20 Hz separately from higher beta components in Parkinson's disease \citep{JenkinsonBrown2011,Levy2002,Mathiopoulou2024}. I report both the global peak frequency over the full spectrum and the strongest local peak within this 10--25 Hz band. Trial-level results were then aggregated into mean and standard deviation estimates across seeds.
+
+For the intervention experiment, the same analysis steps were used, but the rate traces were computed with 2 ms bins so that the spectral estimate could better resolve high-frequency stimulation structure while preserving the same 10--25 Hz summary metric for the pathological rhythm of interest.
+
+\section*{Code Availability}
+All code used for simulation, analysis, and figure generation is included in the accompanying Git repository: \url{https://github.com/limou18754/Bio_Int_Final_Project.git}. The main scripts are stored in \texttt{src/}, generated figures and summary files are written to \texttt{outputs/}, and basic usage instructions are provided in the repository \texttt{README.md}.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

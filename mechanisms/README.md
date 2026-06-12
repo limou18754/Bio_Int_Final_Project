@@ -1,16 +1,11 @@
-# Mechanisms
+# Mechanism Notes
 
-This repository currently uses only built-in `NEURON` artificial cells:
-`IntFire1`.
+The current model uses only built-in `NEURON` artificial cells (`IntFire1`).
 
-That means:
+For this repository version:
 
-- no custom `.mod` files are required for the current implementation
-- no local `nrnmech.dll` compilation step is needed
-- the default expectation is that the project is launched from a conda
-  environment whose interpreter already has `neuron`
-- the project can run after installing `NEURON` plus the Python packages in
-  `requirements.txt`
+- no custom `.mod` mechanism files are needed
+- no local `nrnmech.dll` compilation step is required
+- the code should run once `NEURON` and the packages in `requirements.txt` are installed
 
-If the model is later upgraded to conductance-based neurons or custom
-synapses, the required `.mod` files should be placed in this folder.
+If the model is extended in the future with conductance-based neurons or custom synapses, the corresponding `.mod` files should be placed in this directory.

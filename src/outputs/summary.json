@@ -1,29 +1,56 @@
 {
+  "experiment": {
+    "trials_per_condition": 10,
+    "seed_start": 1,
+    "duration_ms": 8000.0,
+    "analysis_start_ms": 1000.0,
+    "analysis_stop_ms": 8000.0,
+    "bin_ms": 5.0,
+    "focus_band_low_hz": 10.0,
+    "focus_band_high_hz": 25.0
+  },
   "seeds": [
     1,
     2,
     3,
     4,
-    5
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
   ],
   "metrics": {
     "STN": {
-      "healthy_beta_power_mean": 13.816138355367062,
-      "healthy_beta_power_std": 1.0725857645295442,
-      "parkinsonian_beta_power_mean": 53.28431526776419,
-      "parkinsonian_beta_power_std": 6.473453927514693,
-      "beta_power_ratio_pd_over_healthy": 3.856672095865716,
-      "healthy_peak_frequency_mean_hz": 16.015625,
-      "parkinsonian_peak_frequency_mean_hz": 14.21875
+      "healthy_beta_power_mean": 14.703753325708746,
+      "healthy_beta_power_std": 2.08322469950547,
+      "parkinsonian_beta_power_mean": 74.76747309105842,
+      "parkinsonian_beta_power_std": 16.473549890557795,
+      "beta_power_ratio_pd_over_healthy": 5.084924334273984,
+      "healthy_global_peak_frequency_mean_hz": 33.22265625,
+      "healthy_global_peak_frequency_std_hz": 23.266539566581883,
+      "parkinsonian_global_peak_frequency_mean_hz": 15.44921875,
+      "parkinsonian_global_peak_frequency_std_hz": 2.1931602272124495,
+      "healthy_beta_peak_frequency_mean_hz": 16.07421875,
+      "healthy_beta_peak_frequency_std_hz": 3.8133984116912125,
+      "parkinsonian_beta_peak_frequency_mean_hz": 15.44921875,
+      "parkinsonian_beta_peak_frequency_std_hz": 2.1931602272124495
     },
     "GPe": {
-      "healthy_beta_power_mean": 29.229295664784832,
-      "healthy_beta_power_std": 2.7288772200669564,
-      "parkinsonian_beta_power_mean": 43.18740740013749,
-      "parkinsonian_beta_power_std": 15.143063028347072,
-      "beta_power_ratio_pd_over_healthy": 1.4775384222538503,
-      "healthy_peak_frequency_mean_hz": 32.5,
-      "parkinsonian_peak_frequency_mean_hz": 15.0
+      "healthy_beta_power_mean": 28.17142995631942,
+      "healthy_beta_power_std": 6.030683266196879,
+      "parkinsonian_beta_power_mean": 63.64164771168712,
+      "parkinsonian_beta_power_std": 21.50034904554883,
+      "beta_power_ratio_pd_over_healthy": 2.2590847468646515,
+      "healthy_global_peak_frequency_mean_hz": 35.60546875,
+      "healthy_global_peak_frequency_std_hz": 22.439876334925685,
+      "parkinsonian_global_peak_frequency_mean_hz": 14.31640625,
+      "parkinsonian_global_peak_frequency_std_hz": 2.103670672384716,
+      "healthy_beta_peak_frequency_mean_hz": 16.85546875,
+      "healthy_beta_peak_frequency_std_hz": 4.007525041469836,
+      "parkinsonian_beta_peak_frequency_mean_hz": 14.31640625,
+      "parkinsonian_beta_peak_frequency_std_hz": 2.103670672384716
     }
   }
 }

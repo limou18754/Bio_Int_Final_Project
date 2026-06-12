@@ -6,7 +6,7 @@ from copy import deepcopy
 
 
 BASE_CONFIG = {
-    "duration_ms": 4000.0,
+    "duration_ms": 8000.0,
     "dt_ms": 0.1,
     "bin_ms": 5.0,
     "populations": {
@@ -71,7 +71,15 @@ STATE_MODIFIERS = {
 }
 
 
-def make_state_config(state_name: str) -> dict:
+def make_state_config(
+    state_name: str,
+    duration_ms: float | None = None,
+    bin_ms: float | None = None,
+    dt_ms: float | None = None,
+    drive_scale_overrides: dict[str, float] | None = None,
+    connection_weight_scale_overrides: dict[tuple[str, str], float] | None = None,
+    intervention: dict | None = None,
+) -> dict:
     """Return a concrete configuration dictionary for one state."""
 
     if state_name not in STATE_MODIFIERS:
@@ -80,13 +88,30 @@ def make_state_config(state_name: str) -> dict:
     config = deepcopy(BASE_CONFIG)
     modifier = STATE_MODIFIERS[state_name]
 
-    for pop_name, scale in modifier["population_drive_scales"].items():
+    if duration_ms is not None:
+        config["duration_ms"] = duration_ms
+    if bin_ms is not None:
+        config["bin_ms"] = bin_ms
+    if dt_ms is not None:
+        config["dt_ms"] = dt_ms
+
+    drive_scale_map = dict(modifier["population_drive_scales"])
+    if drive_scale_overrides is not None:
+        drive_scale_map.update(drive_scale_overrides)
+
+    for pop_name, scale in drive_scale_map.items():
         config["populations"][pop_name]["drive_weight"] *= scale
 
-    scale_map = modifier["connection_weight_scales"]
+    scale_map = dict(modifier["connection_weight_scales"])
+    if connection_weight_scale_overrides is not None:
+        scale_map.update(connection_weight_scale_overrides)
+
     for connection in config["connections"]:
         key = (connection["pre"], connection["post"])
         connection["weight"] *= scale_map.get(key, 1.0)
+
+    if intervention is not None:
+        config["intervention"] = deepcopy(intervention)
 
     config["state_name"] = state_name
     return config
