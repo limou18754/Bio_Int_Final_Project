@@ -66,4 +66,4 @@ These scripts generate the additional manuscript outputs:
 
 - No custom `.mod` files are required for the current implementation.
 - The DBS-like input is a phenomenological high-frequency suppressive or disruptive drive, not a biophysical extracellular stimulation model.
-- The manuscript source is in [main.tex](/c:/Users/86180/Desktop/undergraduate/2025-Spring/Bio-Int/lab/final_project/paper/main.tex), and the compiled paper is [main.pdf](/c:/Users/86180/Desktop/undergraduate/2025-Spring/Bio-Int/lab/final_project/paper/main.pdf).
+- The manuscript source is in [paper/main.tex](paper/main.tex), and the compiled paper is in [paper/main.pdf](paper/main.pdf).
