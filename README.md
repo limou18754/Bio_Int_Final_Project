@@ -6,6 +6,8 @@ This repository contains the code, generated outputs, and manuscript source for 
 
 The project implements a reduced basal ganglia network in `NEURON` using built-in `IntFire1` cells. The model includes five populations: `D1`, `D2`, `STN`, `GPe`, and `GPi`. Its purpose is to test whether dopamine depletion, represented as a change in pathway balance and STN-GPe loop gain, is sufficient to produce stronger low-beta oscillations.
 
+The manuscript now includes a compact parameter-rationale table that maps the main parkinsonian parameter changes onto their biological motivation. In particular, it distinguishes between core hypothesis-driven changes in direct-pathway, indirect-pathway, and STN-GPe loop balance, versus smaller phenomenological adjustments used to keep the reduced network in a stable pathological regime.
+
 ## Repository Contents
 
 - `paper/`: LaTeX manuscript, bibliography, and compiled PDF
@@ -66,4 +68,5 @@ These scripts generate the additional manuscript outputs:
 
 - No custom `.mod` files are required for the current implementation.
 - The DBS-like input is a phenomenological high-frequency suppressive or disruptive drive, not a biophysical extracellular stimulation model.
+- The biological rationale for the parkinsonian parameter changes is summarized in [paper/main.tex](paper/main.tex) and discussed explicitly as an abstraction rather than a one-to-one fitted physiological model.
 - The manuscript source is in [paper/main.tex](paper/main.tex), and the compiled paper is in [paper/main.pdf](paper/main.pdf).
